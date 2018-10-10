@@ -11,7 +11,7 @@
 ## matrix.
 
 makeCacheMatrix <- function(x=matrix()) {
-
+    # returns a list of set, get matrix, & set, get inverse
     inv <- NULL
     set <- function(y){
         x <<- y
@@ -40,3 +40,18 @@ cacheSolve <- function(x,...){
     x$setinv(inv)
     inv
 }
+
+## Example
+
+B <- matrix(c(1,2,3,4),nrow=2,ncol=2)
+mymatrix <- makeCacheMatrix(B)
+
+## run the solve the first time to compute matrix
+
+inverse <- cacheSolve(mymatrix)
+print (inverse%*%B)# B*Binv = I
+
+## run the solve the second time to use the cached inverse
+
+inverse <- cacheSolve(mymatrix)
+print (inverse%*%B)# B*Binv = I
